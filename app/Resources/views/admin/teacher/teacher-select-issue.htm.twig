@@ -1,0 +1,145 @@
+{% extends 'base.htm.twig' %}
+{% block javascripts %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( ".js-date" ).datepicker();
+        } );
+    </script>
+    <script type="text/javascript">
+        // prepare the form when the DOM is ready
+        $(document).ready(function () {
+            $('body').on('click','#new',function (e) {
+                // bind to the form's submit event
+                $('#newForm').submit(function (e) {
+                    var ajaxRequest;
+
+                    //Prevent Normal Submit
+                    e.preventDefault();
+
+                    $(".message").fadeOut("slow");
+                    $("#newForm").fadeOut("slow");
+                    $('#saving').fadeIn("slow");
+
+                    var form = document.getElementById("newForm");
+                    var elements = form.elements;
+                    for (var i = 0, len = elements.length; i < len; ++i) {
+                        elements[i].readOnly = true;
+                    }
+                    // get form values
+                    var values = $(this).serialize();
+
+                    $.ajax({
+                        url: $(this).data('url'),
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        method: 'POST'
+                    }).done(function (company) {
+                        $('#saving').fadeOut("slow");
+                        $('#message').fadeIn("slow");
+
+                        setTimeout(function () {
+                            jQuery("#message").fadeOut("slow");
+                            location.href='/administrator/hod/books/select'
+                        }, 3000);
+
+                    }).fail(function () {
+                        $('#saving').fadeOut("slow");
+
+                        $("#error").fadeIn("slow");
+
+
+                    })
+
+
+                });
+
+            })
+
+        });
+
+
+    </script>
+
+{% endblock %}
+{% block service %}active{% endblock %}
+{% block pageTitle %}Issue Books{% endblock %}
+{% block body %}
+    <style>
+        .required:after {
+            content:" *";
+            color:red;
+        }
+        label{
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+    </style>
+
+    <article>
+        <div class="article_inner">
+            <div id="saving" class="alert alert-warning" style="display: none">
+                <i class="fa fa-spin fa-spinner"></i>&nbsp;Issuing Books
+            </div>
+            <div id="error" class="alert alert-danger" style="display: none">
+                <i class="fa fa-times"></i>&nbsp;Error, Books not Saved
+            </div>
+            <div id="message" class="alert alert-success" style="display: none">
+                <i class="fa fa-check"></i>&nbsp;Books Issued
+            </div>
+            <div id="form-data" class="form form-wrap" style="">
+                {{ form_start(form,{'attr':{'id':'newForm'}}) }}
+                <h2>Available Books : {{ books | length }}</h2>
+
+                <div>
+                    <div class="column">
+
+                        <div class="form-row">
+                            <div class="form-widget">
+                                {{ form_row(form.teacher, { 'attr': {'id': 'login_form_credentials_username'} }) }}
+                            </div>
+                            <div class="form-errors"></div>
+                        </div>
+
+                    </div>
+                    <div class="column">
+
+                        <div class="form-row">
+                            <div class="form-widget">
+                                {{ form_row(form.numberOfBooks, { 'attr': {'id': 'login_form_credentials_username','max':books | length,'min':1,'value':books | length} }) }}
+                            </div>
+                            <div class="form-errors"></div>
+                        </div>
+
+                    </div>
+                    <div class="button-row">
+                        <input id="new" type="submit" value="Continue">
+
+                        <a href="{{ path('books') }}" id="restore">
+                            Cancel </a>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+
+            </div>
+        </div>
+    </article>
+
+
+    <aside class="">
+        <i class="fa fa-question-circle help-icon"></i>
+        <p>ALL the fields marked (*) are required.</p>
+        <p><b>Title:</b> {{ metadata.title }}</p>
+        <p><b>Subject:</b> {{ metadata.category }}</p>
+        <p><b>Form:</b> {{ metadata.class }}</p>
+        <p><b>Available Books: </b> {{ books | length }}</p>
+    </aside>
+
+
+
+{% endblock %}
+

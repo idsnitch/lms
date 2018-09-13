@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block title %}Dashboard {% endblock %}
+{% block body %}
+    <div class="clearfix"></div>
+
+    <!-- top tiles -->
+    <div class="row tile_count" style="margin-right:-245px;">
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <a href="{{ path('borrowed-books') }}">
+                    <span class="count_top"><i class="fa fa-users"></i> Current</span>
+                </a>
+                <div class="count green">{{ nrCurrentlyBorrowed }}</div>
+                <span class="count_bottom"> Currently Borrowed</span>
+
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <a href="{{ path('students') }}">
+                    <span class="count_top"><i class="fa fa-male"></i> <i class="fa fa-female"></i> Students</span>
+                </a>
+                <div class="count green">
+                    {{ nrStudents }}</div>
+                <span class="count_bottom">Total of Members</span>
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <a href="{{ path('books') }}">
+                    <span class="count_top"><i class="fa fa-book"></i> Books</span>
+                </a>
+                <div class="count green">{{ nrBooks }}</div>
+                <span class="count_bottom ">Total of Books</span>
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <a href="{{ path('borrowed-books') }}">
+                    <span class="count_top"><i class="fa fa-book"></i> Books Borrowed</span>
+                </a>
+                <div class="count green">{{ nrBooksBorrowed }}</div>
+                <span class="count_bottom ">Total of Book Borrowed</span>
+            </div>
+        </div>
+        <div class="animated flipInY col-md-2 col-sm-4 col-xs-4 tile_stats_count">
+            <div class="left"></div>
+            <div class="right">
+                <a href="{{ path('borrowed-books') }}">
+                    <span class="count_top"><i class="fa fa-book"></i> Books Returned</span>
+                </a>
+                <div class="count green">{{ nrBooksReturned }}</div>
+                <span class="count_bottom ">Total Books Returned</span>
+            </div>
+        </div>
+
+    </div>
+    <!-- /top tiles -->
+
+
+
+{% endblock %}

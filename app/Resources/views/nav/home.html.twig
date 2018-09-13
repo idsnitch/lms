@@ -1,0 +1,122 @@
+<ul class="main-ul menu_main">
+    <li>
+        <a href="{{ path('dashboard') }}"
+           class="menu menu_main menu_item_homepage {% if dashboard is defined %}{{ dashboard }}{% endif %}">
+            <span class="menu_text">Dashboard</span>
+        </a>
+    </li>
+    {% if is_granted('ROLE_CAN_ISSUE_HOD') %}
+        <li>
+            <a href="{{ path('new-library-books') }}"
+               class="menu menu_main menu_item_books_new {% if newbookx is defined %}{{ newbookx }}{% endif %}">
+                <span class="menu_text">New Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('issue-library-books') }}"
+               class="menu menu_main menu_item_books_issue {% if issuex is defined %}{{ issuex }}{% endif %}">
+                <span class="menu_text">Issue Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('select-issued-metadata') }}"
+               class="menu menu_main menu_item_books_accept {% if issuedx is defined %}{{ issuedx }}{% endif %}">
+                <span class="menu_text">Issued Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('select-returned-metadata') }}"
+               class="menu menu_main menu_item_books_accept {% if returnedx is defined %}{{ returnedx }}{% endif %}">
+                <span class="menu_text">Returned Books</span>
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_CAN_ISSUE_TEACHER') %}
+        <li>
+            <a href="{{ path('select-accept-meta-hod') }}"
+               class="menu menu_main menu_item_books_accept {% if acceptx is defined %}{{ acceptx }}{% endif %}">
+                <span class="menu_text">Accept Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('select-accepted-meta-hod') }}"
+               class="menu menu_main menu_item_books_accept {% if acceptedx is defined %}{{ acceptedx }}{% endif %}">
+                <span class="menu_text">Accepted Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('hod-select-book') }}"
+               class="menu menu_main menu_item_books_issue {% if issuex is defined %}{{ issuex }}{% endif %}">
+                <span class="menu_text">Issue Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('hod-select-returned-book') }}"
+               class="menu menu_main menu_item_books_return {% if returnedx is defined %}{{ returnedx }}{% endif %}">
+                <span class="menu_text">Returned Books</span>
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_CAN_ISSUE_STUDENT') %}
+
+        <li>
+            <a href="{{ path('select-pending-meta-teacher') }}"
+               class="menu menu_main menu_item_books_accept {% if acceptx is defined %}{{ acceptx }}{% endif %}">
+                <span class="menu_text">Accept Books</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ path('my-accepted-assigned-books-teacher') }}"
+               class="menu menu_main menu_item_books_accept {% if acceptedx is defined %}{{ acceptedx }}{% endif %}">
+                <span class="menu_text">Accepted Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('select-meta-teacher') }}"
+               class="menu menu_main menu_item_books_issue {% if issuex is defined %}{{ issuex }}{% endif %}">
+                <span class="menu_text">Issue Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('select-issued-meta-teacher') }}"
+               class="menu menu_main menu_item_books_issue {% if issuedx is defined %}{{ issuedx }}{% endif %}">
+                <span class="menu_text">Issued Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('my-student-returned-books') }}"
+               class="menu menu_main menu_item_books_return {% if returnedx is defined %}{{ returnedx }}{% endif %}">
+                <span class="menu_text">Returned Books</span>
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_CAN_MANAGE_STUDIES') %}
+        <li>
+            <a href="{{ path('dean-swap-select') }}"
+               class="menu menu_main menu_item_books_exchange {% if swapx is defined %}{{ swapx }}{% endif %}">
+                <span class="menu_text">Swap Active</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('dean-swap-lost') }}"
+               class="menu menu_main menu_item_books_exchange {% if swaplostx is defined %}{{ swaplostx }}{% endif %}">
+                <span class="menu_text">Swap Lost</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('dean-select-replace') }}"
+               class="menu menu_main menu_item_books_transfer {% if replacex is defined %}{{ replacex }}{% endif %}">
+                <span class="menu_text">Replace Book</span>
+            </a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_CAN_ADMINISTER') %}
+        <li>
+            <a href="{{ path('administration') }}"
+               class="menu menu_main menu_item_home_settings {% if newUser is defined %}{{ newUser }}{% endif %}">
+                <span class="menu_text">Administration</span>
+            </a>
+        </li>
+    {% endif %}
+</ul>

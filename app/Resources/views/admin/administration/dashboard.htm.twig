@@ -1,0 +1,95 @@
+{% extends 'base.htm.twig' %}
+{% block body %}
+    <article>
+        <div class="article_inner">
+            <div class="settings_box">
+                <h3 class="divider">
+                    System Management &nbsp;<i class="fa fa-tachometer"></i>
+                </h3>
+
+                <div class="home status" style="">
+                    <div class="status-item">
+                        <a href="{{ path('add-category') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-plus-square"></i></div>
+                            New Subject </a>
+                    </div>
+
+
+                    <div class="status-item">
+                        <a href="{{ path('add-metadata') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-snowflake-o"></i></div>
+                            New Metadata </a>
+                    </div>
+
+                    <div class="status-item checkins">
+                        <a href="{{ path('add-student') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-user-plus"></i></div>
+                            New Student </a>
+                    </div>
+
+                    <div class="status-item checkins">
+                        <a href="{{ path('add-teacher') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-id-badge"></i></div>
+                            New Teacher </a>
+                    </div>
+
+                    <div class="status-item checkins">
+                        <a href="{{ path('add-hod') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-user-secret"></i></div>
+                            New HOD </a>
+                    </div>
+
+                    <div class="status-item checkins">
+                        <a href="{{ path('new-user') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-users"></i></div>
+                            New User </a>
+                    </div>
+                </div>
+                <div class="home status">
+
+                    <div class="status-item checkouts">
+                        <a href="{{ path('books') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-user-o"></i></div>
+                            Subjects </a>
+                    </div>
+                    <div class="status-item checkouts">
+                        <a href="{{ path('metadata') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-sitemap"></i></div>
+                            Metadata </a>
+                    </div>
+                    <div class="status-item checkouts">
+                        <a href="{{ path('students') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;"><i class="fa fa-id-card-o"></i></div>
+                            Students </a>
+                    </div>
+                    <div class="status-item occupancy">
+                    <a href="{{ path('teachers') }}">
+                    <div class="amount" style="color: #5f8398;"><i class="fa fa-address-book-o"></i></div>
+                        Teachers              </a>
+                    </div>
+
+                    <div class="status-item availability">
+                <a href="{{ path('hods') }}" style="color: #0b8788;">
+                    <div class="amount" style="color: #5f8398;"> <i class="fa fa-user-secret"></i></div>
+                    Head of Departments
+                </a>
+                    </div>
+                    <div class="status-item availability">
+                    <a href="{{ path('users') }}" style="color: #0b8788;">
+                    <div class="amount" style="color: #5f8398;"> <i class="fa fa-users"></i></div>
+                    Pending Users
+                    </a>
+                    </div>
+                    <div class="status-item availability">
+                    <a href="{{ path('users') }}" style="color: #0b8788;">
+                    <div class="amount" style="color: #5f8398;"> <i class="fa fa-user-circle"></i></div>
+                        Users      </a>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+
+
+        </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.htm.twig' %}
+{% block body %}
+    <article>
+        <div class="article_inner">
+            <div class="settings_box">
+                <h3 class="divider">
+                    Current status &nbsp;<i class="fa fa-tachometer"></i>
+                </h3>
+
+                <div class="home status">
+                    <div class="status-item">
+                        <a href="{{ path('students') }}" style="color: #ea3e70;">
+                            <div class="amount" style="color: #ea3e70;">{{ nrStudents | number_format }} <i class="fa fa-download"></i></div>
+                            Students                    </a>
+                    </div>
+
+                    <div class="status-item">
+                        <a href="{{ path('books') }}" style="color: #ea3e70;">
+                            <div class="amount" style="color: #ea3e70;">{{ nrBooks | number_format }} <i class="fa fa-users"></i></div>
+                            Total Books                   </a>
+                    </div>
+                    <div class="status-item">
+                        <a href="{{ path('books') }}" style="color: #ea3e70;">
+                            <div class="amount" style="color: #ea3e70;">{{ nrBooks | number_format }} <i class="fa fa-users"></i></div>
+                            Books in Library                    </a>
+                    </div>
+
+                    <div class="status-item">
+                        <a href="" style="color: #ea3e70;">
+                            <div class="amount" style="color: #ea3e70;">{{ nrHodAssigned | number_format }} <i class="fa fa-users"></i></div>
+                            HOD Issued Books                    </a>
+                    </div>
+
+                    <div class="status-item">
+                        <a href="{{ path('books') }}" style="color: #ea3e70;">
+                            <div class="amount" style="color: #ea3e70;">{{ nrTeacherAssigned | number_format }} <i class="fa fa-users"></i></div>
+                            Teacher Issued Books                    </a>
+                    </div>
+                    <div class="status-item checkins">
+                        <a href="{{ path('books') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;">{{ nrCurrentlyBorrowed | number_format }} <i class="fa fa-database"></i></div>
+                            Books Issued                    </a>
+                    </div>
+
+                    <div class="status-item checkouts">
+                        <a href="{{ path('books') }}" style="color: #0b8788;">
+                            <div class="amount" style="color: #0b8788;">{{ nrLostBooks | number_format }} <i class="fa fa-user-o"></i></div>
+                            Lost Books                    </a>
+                    </div>
+
+                    <div class="status-item occupancy">
+                <span class="no-href" style="color: #5f8398;">
+                    <div class="amount" style="color: #5f8398;">{{ nrTeachers | number_format }}<i class="fa fa-drivers-license"></i></div>
+                    Teachers                </span>
+                    </div>
+
+                    <div class="status-item availability">
+                <span class="no-href" style="color: #5f8398;">
+                    <div class="amount" style="color: #5f8398;">{{ nrLibrarians | number_format }} <i class="fa fa-user-secret"></i></div>
+                    Librarians                </span>
+                    </div>
+
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+
+
+        </div></article>
+{% endblock %}

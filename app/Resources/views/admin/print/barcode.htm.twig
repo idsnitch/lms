@@ -1,0 +1,19 @@
+<html>
+<head>
+<title></title>
+    <style type="text/css" media="print">
+        @media print {
+            .footer,
+            #non-printable {
+                display: none !important;
+            }
+            #printable {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body onload="window.print()">
+<img style="width: 450px" src = '{{ asset('knh/BCG/html/image.php') }}?filetype=PNG&dpi=72&scale=1&rotation=0&font_family=Arial.ttf&font_size=10&text="{{ book.barcode }}"&thickness=50&start=NULL&code=BCGcode128' />
+</body>
+</html>

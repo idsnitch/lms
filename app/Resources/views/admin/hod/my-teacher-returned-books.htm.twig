@@ -1,0 +1,136 @@
+
+{% extends 'base.htm.twig' %}
+{% block title %} Returned Books {% endblock %}
+{% block pageTitle %}Returned Books - <br/><p style="font-size: 14px"><b>Subject: </b>{{ meta.category }}  <b>Title: </b>{{ meta.title }} <b>Form: </b>{{ meta.class }} </p>  {% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $('.js-request-user').on('click',function (e) {
+                e.preventDefault();
+
+                var $el = $(this).closest('.js-buyer-item');
+
+                $(this).find('.fa-check')
+                    .removeClass('fa-check')
+                    .addClass('fa-spinner')
+                    .addClass('fa-spin');
+                $.ajax({
+                    url: $(this).data('url'),
+                    method: 'GET'
+                }).done(function () {
+                    $el.fadeOut("slow");
+                });
+            })
+        });
+    </script>
+{% endblock %}
+{% block body %}
+    <article>
+    <div class="article_inner">
+
+    <div id="tabs" style="" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+
+    <div id="ui-tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-2" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div><div id="ui-tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-3" role="tabpanel" aria-expanded="true" aria-hidden="false"><meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <div id="listDiv_current">
+    <form id="list_form_current" method="post" action="">
+        <table id="dtable" width="100%" border="0" cellpadding="0" cellspacing="0" class="list-bookings" style="font-size: 10pt;">
+
+            <thead>
+            <tr>
+                <th class="booking-list-header mobile-hide-cell-950">Bar Code</th>
+                <th class="booking-list-header mobile-hide-cell-950">ID</th>
+                <th class="booking-list-header mobile-hide-cell-950">Title</th>
+                <th class="booking-list-header mobile-hide-cell-950">Teacher</th>
+                <th class="booking-list-header mobile-hide-cell-950">Status</th>
+                <th class="booking-list-header mobile-hide-cell-950">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr class="js-buyer-item">
+                    <td class="booking-list-cell"><span class="toPrint"><img style="width: 150px" src = '{{ asset('knh/BCG/html/image.php') }}?filetype=PNG&dpi=72&scale=1&rotation=0&font_family=Arial.ttf&font_size=10&text="{{ book.barcode }}"&thickness=50&start=NULL&code=BCGcode128' /></span></td>
+                    <td class="booking-list-cell"><a target="_blank" href="print_barcode_individual1.php?code={{ book.barcode }}">{{ book.barcode }}</a></td>
+                    <td class="booking-list-cell">{{ book.metadata.title }}</td>
+                    <td class="booking-list-cell">{{ book.teacherAssigned }}</td>
+                    <td class="booking-list-cell">{{ book.status }}</td>
+                    <td class="booking-list-cell">
+                        <a
+                                class="action request js-request-user btn btn-warning"
+                                data-url="{{ path('accept-book-from-teacher',{
+                                    'id': book.id
+                                }) }}"
+                                href="#">
+                            <i class="fa fa-check"> </i>Accept Book
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </form>
+
+    </div>
+        </div>
+    </div>
+
+    </div>
+    </article>
+
+
+<div class="page-title">
+        <div class="title_left">
+            <h3>
+                <small>Home /</small> Returned Books
+            </h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <p><a href="book_print.php" target="_blank" style="background:none;">
+                    <button class="btn btn-danger pull-right"><i class="fa fa-check-circle-o"></i> Print List</button>
+                    </a></p>
+                <p>
+                <a href="{{ path('hod-select-books-to-return') }}" style="background:none;">
+                    <button class="btn btn-danger pull-right"><i class="fa fa-check-circle-o"></i> Return to Library</button>
+                </a></p>
+                <br />
+                <div class="x_title">
+                    <div class="clearfix"></div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <!-- content starts here -->
+
+                    <div class="table-responsive">
+                    </div>
+
+                    <!-- content ends here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(function(){
+
+            $('#printOut').click(function(e){
+                e.preventDefault();
+                var w = window.open();
+                var $el = $(this).closest('.toPrint').html;
+                var printOne = $(this).closest('.toPrint').html();
+                w.document.write('<html><head><title>BarCode</title></head><body>' + printOne) + '</body></html>';
+                w.window.print();
+                w.document.close();
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

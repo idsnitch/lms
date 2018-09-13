@@ -1,0 +1,64 @@
+{% extends 'base.htm.twig' %}
+
+{% block service %}active{% endblock %}
+{% block pageTitle %}Select Book{% endblock %}
+{% block body %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.17.0/slimselect.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.17.0/slimselect.min.css" rel="stylesheet"/>
+
+    <style>
+        .required:after {
+            content:" *";
+            color:red;
+        }
+        label{
+            text-transform: capitalize;
+            font-weight: bold;
+        }
+    </style>
+
+    <article>
+        <div class="article_inner">
+            <div id="form-data" class="form form-wrap" style="">
+                {{ form_start(form,{'attr':{'id':'neworm'}}) }}
+                <h2>Basic Details</h2>
+
+                <div>
+                    <div class="column">
+
+                        <div class="form-row">
+                            <div class="form-widget">
+                                {{ form_row(form.book, { 'attr': {'class': 'slimSelect'} } ) }}
+                            </div>
+                            <div class="form-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <input id="new" type="submit" value="Continue">
+
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+
+            </div>
+        </div>
+    </article>
+
+
+    <aside class="">
+        <i class="fa fa-question-circle help-icon"></i>
+        <p>ALL the fields marked (*) are required.</p>
+
+    </aside>
+
+
+    <script type="text/javascript">
+        new SlimSelect({
+            select: '.slimSelect'
+        })
+
+    </script>
+
+{% endblock %}
+

@@ -1,0 +1,53 @@
+<div id="form-data" class="form form-wrap" style="">
+    {{ form_start(form,{'attr':{'id':'newForm'}}) }}
+    <h2>Basic Details</h2>
+
+    <div>
+        <div class="column">
+            <div class="form-row">
+                <div class="form-widget">
+                    {{ form_row(form.metadata, { 'attr': {'id': 'login_form_credentials_username'} }) }}
+                </div>
+                <div class="form-errors"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-widget">
+                    {{ form_row(form.yearPurchased, { 'attr': {'id': 'login_form_credentials_username'} }) }}
+                </div>
+                <div class="form-errors"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-widget">
+                    <div><label for="app_bundle_book_form_remarks" class="required">Number Of Books</label>
+                        <input type="number" name="numberOfBooks" id="numberOfBooks" required="required" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-widget">
+                </div>
+                <div class="form-errors"></div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="form-row">
+                <div class="form-widget">
+                    {{ form_row(form.status, { 'attr': {'id': 'login_form_credentials_username'} }) }}
+                </div>
+                <div class="form-errors"></div>
+            </div>
+            <div class="form-row">
+                <div class="form-widget">
+                    {{ form_row(form.remarks, { 'attr': {'id': 'login_form_credentials_username'} }) }}
+                </div>
+                <div class="form-errors"></div>
+            </div>
+
+    </div>
+    <div class="button-row">
+        <input id="login_form__submit" type="submit" value="Save and Close">
+        <input id="new" type="submit" value="Save and New">
+
+        <a href="{{ path('books') }}" id="restore">
+            Cancel </a>
+    </div>
+    {{ form_end(form) }}
+</div>

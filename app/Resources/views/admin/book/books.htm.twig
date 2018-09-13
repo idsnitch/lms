@@ -1,0 +1,128 @@
+{% extends 'base.htm.twig' %}
+{% block title %} Books {% endblock %}
+{% block body %}
+    <article>
+    <div class="article_inner">
+
+    <div id="tabs" style="" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+
+    <div id="ui-tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-2" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;"></div><div id="ui-tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" aria-live="polite" aria-labelledby="ui-id-3" role="tabpanel" aria-expanded="true" aria-hidden="false"><meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <div id="listDiv_current">
+    <form id="list_form_current" method="post" action="">
+        <table id="dtable" width="100%" border="0" cellpadding="0" cellspacing="0" class="list-bookings" style="font-size: 10pt;">
+
+            <thead>
+            <tr>
+                <th class="booking-list-header mobile-hide-cell-950">Bar Code</th>
+                <th class="booking-list-header mobile-hide-cell-950">ID</th>
+                <th class="booking-list-header mobile-hide-cell-950">Title</th>
+                <th class="booking-list-header mobile-hide-cell-950">Subject</th>
+                <th class="booking-list-header mobile-hide-cell-950">Status</th>
+                <th class="booking-list-header mobile-hide-cell-950">Form</th>
+                <th class="booking-list-header mobile-hide-cell-950">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr>
+                    <td class="booking-list-cell"><span class="toPrint"><img style="width: 150px" src = '{{ asset('knh/BCG/html/image.php') }}?filetype=PNG&dpi=72&scale=1&rotation=0&font_family=Arial.ttf&font_size=10&text="{{ book.barcode }}"&thickness=50&start=NULL&code=BCGcode128' /></span></td>
+                    <td class="booking-list-cell"><a target="_blank" href="print_barcode_individual1.php?code={{ book.barcode }}">{{ book.barcode }}</a></td>
+                    <td class="booking-list-cell">{{ book.metadata.title }}</td>
+                    <td class="booking-list-cell">{{ book.metadata.category }}</td>
+                    <td class="booking-list-cell">{{ book.status }}</td>
+                    <td class="booking-list-cell">{{ book.metadata.class }}</td>
+                    <td class="booking-list-cell">
+                        <a class="btn btn-primary" for="ViewAdmin" href="{{ path('borrow-book', {'id': book.id }) }}">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        <a target="_blank" href="{{ path('print-barcode', {'id': book.id }) }}" class="btn btn-warning" for="ViewAdmin">
+                            <i class="fa fa-print"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </form>
+
+    </div>
+        </div>
+    </div>
+
+    </div>
+    </article>
+
+
+<div class="page-title">
+        <div class="title_left">
+            <h3>
+                <small>Home /</small> Books
+            </h3>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <a href="book_print.php" target="_blank" style="background:none;">
+                    <button class="btn btn-danger pull-right"><i class="fa fa-print"></i> Print Books List</button>
+                </a>
+                <a href="print_barcode1.php" target="_blank" style="background:none;">
+                    <button class="btn btn-danger pull-right"><i class="fa fa-print"></i> Print Books Barcode</button>
+                </a>
+                <br />
+                <br />
+                <div class="x_title">
+                    <h2><i class="fa fa-book"></i> {{ title }} Books</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li style="list-style: none">
+                            <a href="{{ path('add-book') }}" style="background:none;">
+                                <button class="btn btn-primary"><i class="fa fa-plus"></i> Add Book</button>
+                            </a>
+                        </li>
+                    </ul><br/>
+                    <div class="clearfix"></div>
+                    <ul class="nav nav-pills">
+                        <li role="presentation" class="{% if title=='All' %}active {% endif %}"><a href="{{ path('books') }}">All</a></li>
+                        <li role="presentation" class="{% if title=='New' %}active {% endif %}"><a href="{{ path('new-books') }}">New Books</a></li>
+                        <li role="presentation" class="{% if title=='Old' %}active {% endif %}"><a href="{{ path('old-books') }}">Old Books</a></li>
+                        <li role="presentation" class="{% if title=='Lost' %}active {% endif %}"><a href="{{ path('lost-books') }}">Lost Books</a></li>
+                        <li role="presentation" class="{% if title=='Damaged' %}active {% endif %}"><a href="{{ path('damaged-books') }}">Damaged Books</a></li>
+                        <li role="presentation" class="{% if title=='Replacement' %}active {% endif %}"><a href="{{ path('replacement-books') }}">Replacement Books</a></li>
+                        <li role="presentation" class="{% if title=='Hardbound' %}active {% endif %}"><a href="{{ path('hardbound-books') }}">Hardbound Books</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <!-- content starts here -->
+
+                    <div class="table-responsive">
+                    </div>
+
+                    <!-- content ends here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(function(){
+
+            $('#printOut').click(function(e){
+                e.preventDefault();
+                var w = window.open();
+                var $el = $(this).closest('.toPrint').html;
+                var printOne = $(this).closest('.toPrint').html();
+                w.document.write('<html><head><title>BarCode</title></head><body>' + printOne) + '</body></html>';
+                w.window.print();
+                w.document.close();
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
